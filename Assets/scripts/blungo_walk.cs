@@ -5,9 +5,11 @@ using UnityEngine;
 public class blungo_walk : MonoBehaviour
 {
     public float directionX;
+    public float previousDirection;
     public float speed;
     public float minSpeed;
     public float maxSpeed;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -18,19 +20,24 @@ public class blungo_walk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d")&& !Input.GetKey("a"))
         {
             directionX = 1f;
+            
         }
-        else if (Input.GetKey("a"))
+        else if (Input.GetKey("a")&& !Input.GetKey("d"))
         {
             directionX = -1f;
         }
         else
         {
             directionX = 0f;
-            speed = 5f;
         }
+        if (previousDirection!= directionX)
+        {
+            speed = minSpeed;
+        }
+        previousDirection = directionX;
         
         transform.position = new Vector3(transform.position.x + directionX * speed * Time.deltaTime, transform.position.y, transform.position.z);
 
