@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class blungo_walk : MonoBehaviour
 {
-    public float movementX;
+    public float directionX;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,22 +18,35 @@ public class blungo_walk : MonoBehaviour
     {
         if (Input.GetKey("d"))
         {
-            movementX = 1f;
+            directionX = 1f;
         }
         else if (Input.GetKey("a"))
         {
-            movementX = -1f;
+            directionX = -1f;
         }
         else
         {
-            movementX = 0f;
+            directionX = 0f;
+            speed = 5f;
         }
-            transform.position = new Vector3(transform.position.x + 5f * movementX * Time.deltaTime, transform.position.y, transform.position.z);
-        }
-       
+        
+        transform.position = new Vector3(transform.position.x + directionX * speed * Time.deltaTime, transform.position.y, transform.position.z);
+
+
         //transform.position = this objects position 
         //Vector3 = how coordinates are stored aka Vector3(x,y,z)
         //Input.GetAxis("Horizontal") gives us a float value for the horizontal axis -1f to 1f , left to right
         //Time.deltaTime is the time between updates aka the time between frames 
     }
+    private void FixedUpdate()
+    {
+        if(directionX!=0f && speed < 8f)
+        {
+            speed += 6 * Time.deltaTime;
+            print(speed);
+        }
+    }
+}
+
+
 
