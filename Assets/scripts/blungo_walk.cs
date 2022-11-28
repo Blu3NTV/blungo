@@ -6,6 +6,8 @@ public class blungo_walk : MonoBehaviour
 {
     public float directionX;
     public float speed;
+    public float minSpeed;
+    public float maxSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +42,14 @@ public class blungo_walk : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(directionX!=0f && speed < 8f)
+//minSpeed = 5f
+//maxSpeed = 8f
+//speedDif = maxSpeed - min Speed
+//speed += n * speedDif * Time.deltaTime;
+
+        if(directionX!=0f && speed < maxSpeed)
         {
-            speed += 6 * Time.deltaTime;
+            speed += 2 * (maxSpeed - minSpeed) * Time.deltaTime;
             print(speed);
         }
     }
